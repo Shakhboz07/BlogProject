@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shakhboz Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+<header>
+    <h1><a href="{% url 'home' %}">Shakhboz Blog</a></h1>
+    <h2 style="right: auto"><a href="{% url 'post_new' %}">Create New Post</a></h2>
+</header>
+{% if user.is_authenticated %}
+    <p>Welcome,{{ user.username }}!!</p>
+    <a href="{% url 'logout' %}">Log out</a>
+{% else %}
+    <a href="{% url 'login' %}">Log in</a> |
+    <a href="{% url 'signup' %}">Sign Up</a>
+{% endif %}
+<div>
+    {% block content %}
+    {% endblock content %}
+</div>
+</body>
+</html>
